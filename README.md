@@ -1,5 +1,4 @@
 # Twilio → MQTT Gateway
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 A web application that implements a Twilio callback to relay incoming SMS
 messages to a MQTT server.
@@ -13,16 +12,42 @@ For the original motivation, see the Olin Library
 Each number `+16175551212` is published with topic `incoming-sms-16175551212`,
 and with a payload of the JSON-encoded HTTP request form fields.
 
-## Configuration
+## Deploy
 
-`MQTT_URL`, `CLOUDMQTT_URL`, `CLOUDAMQP_URL` — if you're not using a local
-RabbitMQ server, set one of these.
+Provision a RabbitMQ server. I'm using
+[CloudAMQP](https://www.cloudamqp.com). Note its URL.
 
-`RESPONSE_TEXT` — if set, respond to incoming messages with this text.
+For each provisioned phone number
 
-`HOST`, `PORT`, `FLASK_DEBUG` — what you'd expect.
+```bash
+rabbitmqadmin declare queue name=incoming-sms-16175551010
+rabbitmqadmin declare binding source=amq.topic destination_type=queue \
+    destination=incoming-sms-16175551010 routing_key=incoming-sms-16175551010
+```
 
-## Development
+Execute the following. Replace the value of MQTT_URL by the URL of your
+RabbitMQ server.
+
+```bash
+$ heroku create
+$ heroku config:set $ MQTT_URL='mqtt://username:password@termite.rmq.cloudamqp.com:1883/vhost'
+$ git push heroku master
+```
+
+Optional `config:set RESPONSE_TEXT`. if set, the gateway responds with this
+text to incoming messages.
+
+Provision a Twilio phone number. Set its messaging webhook to `https://sharp-rain-871.herokuapp.com/sms_webhook`, where `sharp-rain-871`
+is the name of your Heroku app.
+
+In RabbitMQ, for each phone number `+16175551010`, create a queue named
+`incoming-sms-16175551010`, and bind it with that same name to the topic
+exchange.
+
+You can also do this programmatically. See the Jupyter notebook in this repo
+for an example.
+
+## Develop
 
 Either set install a local RabbitMQ server, *or* set `MQTT_URL` to a remote
 server.
@@ -33,17 +58,12 @@ Install [ngrok](https://ngrok.com). In another terminal, run
 `ngrok http 5000`. This gives your local webserver a public hostname that you
 can configure Twilio to connect to.
 
-Provision a Twilio phone number, and direct it to your local instance.
-
 1. Go to the Twilio phone number configuration page, e.g. <https://www.twilio.com/console/phone-numbers/{sid}>.
 2. Under "Messaging: A Message Comes In", set the webhook to the server URL
    followed by the `/sms_webhook` path, e.g.
    `https://c115d7a2.ngrok.io/sms_webhook`.
 
-The Jupyter notebook in this directory demonstrates how to do this
-programmatically, and for a list of numbers.
-
-### Installing a RabbitMQ server
+### Use a local RabbitMQ server
 
 For local development, you may find it useful to run a local RabbitMQ server.
 
@@ -54,22 +74,13 @@ Add `rabbitmqadmin` to your path. (On macOS: `export
 PATH=/usr/local/Cellar/rabbitmq/3.7.2/sbin/:PATH`.) Alternatively, you can
 replace `rabbitmqadmin` by `/path/to/rabbitmqadmin` in the instructions below.
 
-Create a queue for your phone number, and bind it to the topic:
+Create a queue for your phone number:
 
 ```bash
 rabbitmqadmin declare queue name=incoming-sms-16175551010
 rabbitmqadmin declare binding source=amq.topic destination_type=queue \
     destination=incoming-sms-16175551010 routing_key=incoming-sms-16175551010
 ```
-
-The Jupyter notebook in this directory demonstrates how to do this
-programmatically.
-
-## Deployment
-
-You will need a RabbitMQ server. I'm using
-[CloudAMQP](https://www.cloudamqp.com). Set `CLOUDMQTT_URL` to its URL.
-
 ## License
 
 MIT
