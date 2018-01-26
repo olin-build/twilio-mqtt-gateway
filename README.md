@@ -1,4 +1,5 @@
 # Twilio → MQTT Gateway
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 A web application that implements a Twilio callback to relay incoming SMS
 messages to a MQTT server.
@@ -15,9 +16,7 @@ and with a payload of the JSON-encoded HTTP request form fields.
 ## Configuration
 
 `MQTT_URL`, `CLOUDMQTT_URL`, `CLOUDAMQP_URL` — if you're not using a local
-RabbitMQ server, set one of these. The `CLOUD*` ones allow for automatic
-configuration with various Heroku add-ons. `MQTT_URL` reads better for local
-development.
+RabbitMQ server, set one of these.
 
 `RESPONSE_TEXT` — if set, respond to incoming messages with this text.
 
@@ -65,6 +64,11 @@ rabbitmqadmin declare binding source=amq.topic destination_type=queue \
 
 The Jupyter notebook in this directory demonstrates how to do this
 programmatically.
+
+## Deployment
+
+You will need a RabbitMQ server. I'm using
+[CloudAMQP](https://www.cloudamqp.com). Set `CLOUDMQTT_URL` to its URL.
 
 ## License
 

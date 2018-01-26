@@ -1,0 +1,16 @@
+{
+    "name": "Twilio → MQTT Gateway",
+    "description": "Relay incoming SMS messages to a MQTT server",
+    "repository": "https://github.com/olin-build/twilio-mqtt-gateway",
+    "success_url": "/welcome",
+    "env": {
+        "MQTT_URL": {
+            "description": "URL to an MQTT server",
+            "required": true
+        },
+        "RESPONSE_TEXT": {
+            "description": "If set, respond to incoming messages with this text",
+            "required": false
+        }
+    }
+}
