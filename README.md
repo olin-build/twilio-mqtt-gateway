@@ -1,7 +1,9 @@
 # Twilio → MQTT Gateway
 
-A web application that implements a Twilio callback to relay incoming SMS
-messages to a MQTT server.
+A web application implementing a Twilio webhook handler, that relay incoming SMS
+messages to an MQTT server.
+
+![](./docs/network-diagram.png)
 
 This allows a number of clients to subscribe to incoming SMS messages, without
 each requiring a web presence.
@@ -14,8 +16,8 @@ and with a payload of the JSON-encoded HTTP request form fields.
 
 ## Deploy
 
-Provision a RabbitMQ server. I'm using
-[CloudAMQP](https://www.cloudamqp.com). Note its URL.
+Provision a RabbitMQ server. (I'm using
+[CloudAMQP](https://www.cloudamqp.com).) Note your server's URL.
 
 For each provisioned phone number
 
@@ -46,6 +48,10 @@ exchange.
 
 You can also do this programmatically. See the Jupyter notebook in this repo
 for an example.
+
+## Manage
+
+See the [wiki](https://github.com/olin-build/twilio-mqtt-gateway/wiki/Runbook) and the [server management notebook](./Server%20Management%20Recipes.ipynb).
 
 ## Develop
 

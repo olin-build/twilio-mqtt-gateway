@@ -1,0 +1,22 @@
+@startuml
+actor phone
+cloud foo {
+    node twilio
+    node twilio_gateway
+    node RabbitMQ {
+        top to bottom direction
+        entity exchange
+        queue incoming_sms_6175551010
+        queue incoming_sms_6175552121
+        queue incoming_sms_6175553232
+    }
+}
+node client
+phone -> twilio: SMS
+twilio -> twilio_gateway: POST /sms
+twilio_gateway -> exchange
+exchange --> incoming_sms_6175551010
+exchange --> incoming_sms_6175552121
+exchange --> incoming_sms_6175553232
+incoming_sms_6175551010 --> client
+@enduml
