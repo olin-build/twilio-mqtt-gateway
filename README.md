@@ -1,4 +1,4 @@
-# Twilio → MQTT Gateway
+# Twilio ⟶ MQTT Gateway
 
 A web application implementing a Twilio webhook handler, that relay incoming SMS
 messages to an MQTT server.

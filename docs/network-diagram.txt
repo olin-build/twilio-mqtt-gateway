@@ -1,20 +1,30 @@
 @startuml
-actor phone
-cloud foo {
-    node twilio
-    node twilio_gateway
+skinparam handwritten true
+
+actor "User" as phone
+cloud Cloud {
+    node "Twilio Service" as twilio
+    node "Twilio Gateway" as twilio_gateway {
+        component server
+    }
     node RabbitMQ {
         top to bottom direction
-        entity exchange
+        storage "topic exchange" as exchange
         queue incoming_sms_6175551010
         queue incoming_sms_6175552121
         queue incoming_sms_6175553232
     }
 }
-node client
+note top of twilio_gateway : running on Heroku
+note top of RabbitMQ : running on the CloudAMQP service
+
+node "Client machine" {
+    component client
+}
+
 phone -> twilio: SMS
-twilio -> twilio_gateway: POST /sms
-twilio_gateway -> exchange
+twilio -> server: POST /sms
+server -> exchange
 exchange --> incoming_sms_6175551010
 exchange --> incoming_sms_6175552121
 exchange --> incoming_sms_6175553232
