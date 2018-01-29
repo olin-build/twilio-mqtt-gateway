@@ -5,9 +5,9 @@ actor "User" as phone
 cloud Cloud {
     node "Twilio Service" as twilio
     node "Twilio Gateway" as twilio_gateway {
-        component server
+        component "twilio_gateway.py" as server
     }
-    node RabbitMQ {
+    node "RabbitMQ Server" as RabbitMQ {
         top to bottom direction
         storage "topic exchange" as exchange
         queue incoming_sms_6175551010
@@ -15,18 +15,19 @@ cloud Cloud {
         queue incoming_sms_6175553232
     }
 }
-note top of twilio_gateway : running on Heroku
-note top of RabbitMQ : running on the CloudAMQP service
+note top of twilio_gateway : Running on e.g. Heroku
+note top of RabbitMQ : Running on e.g. CloudAMQP
+note bottom of incoming_sms_6175552121 : One queue per phone number.
 
 node "Client machine" {
-    component client
+    component "client app" as client
 }
 
-phone -> twilio: SMS
-twilio -> server: POST /sms
-server -> exchange
+phone --> twilio: SMS
+twilio --> server: POST /sms
+server --> exchange
 exchange --> incoming_sms_6175551010
 exchange --> incoming_sms_6175552121
 exchange --> incoming_sms_6175553232
-incoming_sms_6175551010 --> client
+incoming_sms_6175551010 ---> client
 @enduml
