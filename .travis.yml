@@ -1,5 +1,10 @@
 language: python
 python:
-  - "3.6"
+- '3.6'
 script:
-  - pytest
+- pytest
+deploy:
+  provider: heroku
+  app: twilio-gateway
+  api_key:
+    secure: ugTK7kRnjnHO6n+uKPiJ+EQH5JiJWVdEY9PS1RPzSb3wF3e46731pbqdSsJgLvBE0xGpeuOvaN1uT0mfzip2rXyI1hM0NpONnnZpzbXwrl3k4yxUkb5XFPXxtUzGYk5iKC4yFUzAQJaPQwKRbLGzzJzGfvLwRlPiJD3LONO1J+NtCniYxr5cuQVsGYL6N9hC1A0TyO6O9jyRQaiyU2CAHFLUWjp/GG/qwhNZf3IXLTMzoIATyF0PigAue1MV/SO/KODOwvgQuHoy14LJF0us8/Ur1aWnO95oQR5oIKP91d/Z3yJgzi2fnMuDdGLfB9PRBXhUs3blXMcMajk0to6OE4DRXtmLDD30I75abbVvzsvgibeJR4GCYDItVSFc9cQ/8pEDF6jNx21DyjxJQe+WbhwlZUhdVxrWf1q3ZPwQECGIhFAfoXJ6ZYORvYvvfw/NKK16XDNuNILGlosyblxyl4c+BK/ZwuiBHUCccx0QdXNBNxTzUEZTKSpLO4F9CVR8qFcyrzvJITyPdtWQRjFXRvpvb8L//pxLLl/PeHIfjkt7gyrLVp48E3rqAsU4dVcU8XSnO1FrSVDO7PMygGUsEubxp8vByTopXSpd0HxB3iVcRnyB3/I2EUDvH0zNGw3Uxqdm2PvE/0r0A8eVuTPtCEZx2FRFUlHbt7Ek/4iyziA=
