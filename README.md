@@ -1,6 +1,7 @@
 # Twilio ⟶ MQTT Gateway
+[![Build Status](https://travis-ci.org/olin-build/twilio-mqtt-gateway.svg?branch=master)](https://travis-ci.org/olin-build/twilio-mqtt-gateway)
 
-A web application implementing a Twilio webhook handler, that relay incoming SMS
+A web application implementing a Twilio webhook handler, that relays incoming SMS
 messages to an MQTT server.
 
 This allows a number of clients to subscribe to incoming SMS messages, without
