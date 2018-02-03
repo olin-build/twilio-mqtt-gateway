@@ -58,6 +58,8 @@ See the [wiki](https://github.com/olin-build/twilio-mqtt-gateway/wiki/Runbook) a
 Either install a local RabbitMQ server, *or* set `MQTT_URL` to a remote
 server.
 
+Run `pip install -r dev-requirements.txt`
+
 Run `python twilio_gateway.py`.
 
 Install [ngrok](https://ngrok.com). In another terminal, run

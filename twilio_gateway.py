@@ -2,10 +2,11 @@ import logging
 import os
 import sys
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from twilio.twiml.messaging_response import MessagingResponse
 
-from send_mqtt_messages import publish
+import send_mqtt_messages
+
 
 logging.basicConfig(level=logging.WARNING)
 logger = logging.getLogger('messages')
@@ -29,13 +30,15 @@ def sms_webhook():
     topic = request.form['To'].replace('+', 'incoming-sms-')
     payload = request.form.to_dict(flat=True)
     logger.info('publish {} to {}'.format(payload, topic))
-    publish(topic, **request.form)
+    send_mqtt_messages.publish(topic, **request.form)
 
     resp = MessagingResponse()
     if RESPONSE_TEXT:
         resp.message(RESPONSE_TEXT)
     return str(resp)
 
-logger.setLevel(logging.INFO)
-logger.info(f"Listening on http://{HOST}:{PORT} FLASK_DEBUG={FLASK_DEBUG}'")
-app.run(host=HOST, port=PORT, debug=FLASK_DEBUG)
+
+if __name__ == '__main__':
+    logger.setLevel(logging.INFO)
+    logger.info(f"Listening on http://{HOST}:{PORT} FLASK_DEBUG={FLASK_DEBUG}'")
+    app.run(host=HOST, port=PORT, debug=FLASK_DEBUG)
