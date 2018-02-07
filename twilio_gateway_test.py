@@ -22,8 +22,7 @@ def test_webhook(publish):
         Body='message body',
     )
     assert client.post('/sms_webhook', data=data).status_code == 200
-    # FIXME the app should flatten these
     publish.assert_called_once_with('incoming-sms-16175552323',
-                                    From=['+16175553434'],
-                                    To=['+16175552323'],
-                                    Body=['message body'])
+                                    From='+16175553434',
+                                    To='+16175552323',
+                                    Body='message body')

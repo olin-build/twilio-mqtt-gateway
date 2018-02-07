@@ -30,7 +30,7 @@ def sms_webhook():
     topic = request.form['To'].replace('+', 'incoming-sms-')
     payload = request.form.to_dict(flat=True)
     logger.info('publish {} to {}'.format(payload, topic))
-    send_mqtt_messages.publish(topic, **request.form)
+    send_mqtt_messages.publish(topic, **payload)
 
     resp = MessagingResponse()
     if RESPONSE_TEXT:
