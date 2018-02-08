@@ -3,6 +3,7 @@
 # Testing
 pytest~=3.2.2
 pytest-watch
+tox
 
 # Lint
 flake8

@@ -81,6 +81,8 @@ Install [ngrok](https://ngrok.com). In another terminal, run
 
 `flake8 .` lints the code.
 
+`tox` runs the tests and linter in their own Python virtual environment.
+
 ### Use a local RabbitMQ server
 
 For local development, you may find it useful to run a local RabbitMQ server.
