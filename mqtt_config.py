@@ -5,7 +5,9 @@ import os
 # providers configure Heroku with different environment variables, and we want
 # to be able to work with all of them.
 MQTT_ENV_VARS = ['MQTT_URL', 'CLOUDMQTT_URL', 'CLOUDAMQP_URL']
-MQTT_URL = next((value for value in (os.environ.get(name) for name in MQTT_ENV_VARS) if value),
+MQTT_URL = next((value
+                 for value in (os.environ.get(name) for name in MQTT_ENV_VARS)
+                 if value),
                 "mqtt://localhost")
 
 hostname = None

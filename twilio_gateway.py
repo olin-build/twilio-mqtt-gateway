@@ -1,6 +1,5 @@
 import logging
 import os
-import sys
 
 from flask import Flask, render_template, request
 from twilio.twiml.messaging_response import MessagingResponse
@@ -40,5 +39,6 @@ def sms_webhook():
 
 if __name__ == '__main__':
     logger.setLevel(logging.INFO)
-    logger.info(f"Listening on http://{HOST}:{PORT} FLASK_DEBUG={FLASK_DEBUG}'")
+    logger.info(
+        f"Listening on http://{HOST}:{PORT} FLASK_DEBUG={FLASK_DEBUG}'")
     app.run(host=HOST, port=PORT, debug=FLASK_DEBUG)

@@ -1,4 +1,16 @@
 -r requirements.txt
 
+# Testing
 pytest~=3.2.2
 pytest-watch
+
+# Lint
+flake8
+# I generally run with these:
+mccabe            # report functions with high complexity
+flake8-bandit     # security testing
+flake8-bugbear    # likely bugs and design problems
+flake8-builtins   # using a Python built-in as a variable name
+flake8-docstrings # doc string format
+# I just discovered this:
+flake8-mock       # mock methods that don't look like they'd assert but don't

@@ -32,13 +32,15 @@ def repl(topic):
 def main(topic='speak'):
     # logger.setLevel(logging.INFO)
     if not mqtt_config.hostname:
-        print('At least one of these must be set:', ', '.join(mqtt_config.MQTT_ENV_VARS), file=sys.stderr)
+        print('At least one of these must be set:',
+              ', '.join(mqtt_config.MQTT_ENV_VARS), file=sys.stderr)
         sys.exit(1)
     if len(sys.argv) > 1:
         message = sys.argv[1]
         publish(topic, message=message)
     else:
         repl(topic)
+
 
 if __name__ == '__main__':
     main()

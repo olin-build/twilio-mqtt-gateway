@@ -1,10 +1,5 @@
-import flask
-import os
-import sys
-
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch
 from twilio_gateway import app
-from flask import url_for
 
 app.testing = True
 client = app.test_client()
