@@ -6,7 +6,6 @@ from twilio.twiml.messaging_response import MessagingResponse
 
 import send_mqtt_messages
 
-
 logging.basicConfig(level=logging.WARNING)
 logger = logging.getLogger('messages')
 

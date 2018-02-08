@@ -12,5 +12,6 @@ flake8-bandit     # security testing
 flake8-bugbear    # likely bugs and design problems
 flake8-builtins   # using a Python built-in as a variable name
 flake8-docstrings # doc string format
+flake8-isort      # alphabetize and group imports according to PEP8
 # I just discovered this:
 flake8-mock       # mock methods that don't look like they'd assert but don't

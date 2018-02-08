@@ -1,5 +1,5 @@
-from urllib.parse import urlparse
 import os
+from urllib.parse import urlparse
 
 # Try all of these. We use MQTT_URL locally; different RabbitMQ hosting
 # providers configure Heroku with different environment variables, and we want
