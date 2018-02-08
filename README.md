@@ -56,6 +56,8 @@ See the [wiki](https://github.com/olin-build/twilio-mqtt-gateway/wiki/Runbook) a
 
 ## Develop
 
+### Setup
+
 Either install a local RabbitMQ server, *or* set `MQTT_URL` to a remote
 server.
 
@@ -70,6 +72,14 @@ Install [ngrok](https://ngrok.com). In another terminal, run
 2. Under "Messaging: A Message Comes In", set the webhook to the server URL
    followed by the `/sms_webhook` path, e.g.
    `https://c115d7a2.ngrok.io/sms_webhook`.
+
+### Test
+
+`pytest` runs the unit tests (currently just of the `mqtt_json` package).
+
+`pytest-watch` runs the tests in watch mode.
+
+`flake8 .` lints the code.
 
 ### Use a local RabbitMQ server
 
@@ -88,6 +98,7 @@ rabbitmqadmin declare queue name=incoming-sms-16175551010
 rabbitmqadmin declare binding source=amq.topic destination_type=queue \
     destination=incoming-sms-16175551010 routing_key=incoming-sms-16175551010
 ```
+
 ## License
 
 MIT
