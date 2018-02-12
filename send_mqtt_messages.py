@@ -7,7 +7,7 @@ import paho.mqtt.publish as mqtt_publish
 import mqtt_config
 
 logging.basicConfig(level=logging.WARNING)
-logger = logging.getLogger('messages')
+logger = logging.getLogger(__name__)
 
 
 def publish(topic, **payload):

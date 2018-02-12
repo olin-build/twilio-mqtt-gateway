@@ -7,7 +7,7 @@ from twilio.twiml.messaging_response import MessagingResponse
 import send_mqtt_messages
 
 logging.basicConfig(level=logging.WARNING)
-logger = logging.getLogger('messages')
+logger = logging.getLogger('server')
 
 HOST = '0.0.0.0' if 'PORT' in os.environ else '127.0.0.1'
 PORT = int(os.environ.get('PORT', 5000))
